@@ -33,6 +33,35 @@ echo "(*) Hardening Dovecot SSL configuration..."
 mv /etc/dovecot/conf.d/10-ssl.conf $HESTIA_BACKUP/conf/
 cp -f $HESTIA_INSTALL_DIR/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/
 
+# Add security groups for normal users and admin users
+echo "(*) Verifying ACLs and hardening user permissions..."
+if [ -z "$(grep ^hestia-users: /etc/group)" ]; then
+    groupadd --system "hestia-users"
+fi
+if [ -z "$(grep ^hestia-admins: /etc/group)" ]; then
+    groupadd --system "hestia-admins"
+fi
+
+# Make sure non-admin users belong to correct Hestia group
+for user in `ls /usr/local/hestia/data/users/`; do
+    if [ "$user" != "admin" ]; then
+        usermod -a -G "hestia-users" "$user"
+        setfacl -m "u:$user:r-x" "$HOMEDIR/$user"
+
+        # Update FTP users groups membership
+        uid=$(id -u $user)
+        for ftp_user in $(cat /etc/passwd | grep -v "^$user:" | grep "^$user.*:$uid:$uid:" | cut -d ":" -f1); do
+            usermod -a -G "hestia-users" "$ftp_user"
+        done
+    fi
+    setfacl -m "g:hestia-users:---" "$HOMEDIR/$user"
+done
+
+# Add admin user to elevated permissions group and lock down permissions on Hestia's script library
+chmod 750 -R $HESTIA/bin
+usermod -a -G "hestia-admins" "admin"
+setfacl -m "g:hestia-admins:r-x" "$HESTIA/bin"
+
 # Update DNS resolvers in hestia-nginx's configuration
 echo "(*) Updating DNS resolvers for Hestia Internal Web Server..."
 dns_resolver=$(cat /etc/resolv.conf | grep -i '^nameserver' | cut -d ' ' -f2 | tr '\r\n' ' ' | xargs)
