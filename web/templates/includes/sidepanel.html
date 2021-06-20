@@ -1,3 +1,11 @@
+<?php
+exec (HESTIA_CMD."v-list-sys-info json", $output, $return_var);
+$sys = json_decode(implode('', $output), true);
+unset($output);
+exec (HESTIA_CMD."v-list-sys-hestia-autoupdate plain", $output_updates, $return_var);
+$autoupdate = $output_updates['0'];
+unset($output_updates);
+?>
 <aside class="sidepanel menu responsive card">
 	<nav>
 		<ul>
@@ -56,8 +64,7 @@
 					</div>
 					<ul class="submenu">
 						<li>
-							<a href="/add/user/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle
-"></i> <?=_('Add User');?></a>
+							<a href="/add/user/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add User');?></a>
 						</li>
 						<li>
 							<a href="/list/package/" class="l-menu__item" dir="ltr"><i class="fas fa-box-open"></i> <?=_('Packages');?></a>
@@ -119,7 +126,342 @@
 				</li>
 				<?php } ?>
 			<?php } ?>
-			
+			<!-- Mail tab -->
+			<?php if ((isset($_SESSION['MAIL_SYSTEM'])) && (!empty($_SESSION['MAIL_SYSTEM']))) {?>
+				<?php if($panel[$user]['MAIL_DOMAINS'] != "0") { ?>
+				<li>
+					<div class="l-menu__item <?php if($TAB == 'MAIL') echo 'l-menu__item--active' ?>">
+						<div class="l_menu_wide_item">
+							<a href="/list/mail/">
+								<div class="l-menu__icon"><i class="fas fa-mail-bulk"></i></div>
+        	                                                <div class="l-destribution">
+                	                                        	<div class="l-menu__col-title"><?=_('MAIL');?> <span><?=$panel[$user]['U_MAIL_DOMAINS']?> / <?=$panel[$user]['MAIL_DOMAINS']=='unlimited' ? "<b>∞</b>" : $panel[$user]['MAIL_DOMAINS']?> (<?=$panel[$user]['SUSPENDED_MAIL']?>)</span></div>
+									<div class="l-menu__description">
+                                	                                	<?=_('accounts');?>: <span><?=$panel[$user]['U_MAIL_ACCOUNTS']?> / <?=$panel[$user]['MAIL_ACCOUNTS']=='unlimited' ? "<b>∞</b>" : $panel[$user]['MAIL_ACCOUNTS'] * $panel[$user]['MAIL_DOMAINS']?></span>
+									</div>
+                                                	        </div>
+							
+							</a>
+							<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+						</div>
+						<ul class="submenu">
+                                                        <li>
+                                                                <a href="/add/mail/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add Mail Domain');?></a>
+                                                        </li>
+                                                </ul>
+					</div>
+				</li>
+				<?php } ?>
+			<?php } ?>
+			<!-- Databases tab -->
+			<?php if ((isset($_SESSION['DB_SYSTEM'])) && (!empty($_SESSION['DB_SYSTEM']))) {?>
+				<?php if($panel[$user]['DATABASES'] != "0") { ?>
+				<li>
+					<div class="l-menu__item <?php if($TAB == 'DB') echo 'l-menu__item--active' ?>">
+                                                <div class="l_menu_wide_item">
+                                                        <a href="/list/db/">
+                                                                <div class="l-menu__icon"><i class="fas fa-database"></i></div>
+                                                                <div class="l-destribution">
+                                                                        <div class="l-menu__col-title"><?=_('DB');?></div>
+									<div class="l-menu__description">
+										<?=_('databases');?>: <span><?=$panel[$user]['U_DATABASES']?> / <?=$panel[$user]['DATABASES']=='unlimited' ? "<b>∞</b>" : $panel[$user]['DATABASES']?> (<?=$panel[$user]['SUSPENDED_DB']?>)</span>
+                                                                        </div>
+                                                                </div>
+
+                                                        </a>
+                                                        <div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+                                                </div>
+                                                <ul class="submenu">
+                                                        <li>
+                                                                <a href="/add/db/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add Database');?></a>
+                                                        </li>
+                                                </ul>
+                                        </div>
+				</li>
+				<?php } ?>
+			<?php } ?>
+			<!-- Cron tab -->
+			<?php if ((isset($_SESSION['CRON_SYSTEM'])) && (!empty($_SESSION['CRON_SYSTEM']))) {?>
+				<?php if($panel[$user]['CRON_JOBS'] != "0") { ?>
+				<li>
+					<div class="l-menu__item <?php if($TAB == 'CRON') echo 'l-menu__item--active' ?>">
+						<div class="l_menu_wide_item">
+							<a href="/list/cron/">
+								<div class="l-menu__icon"><i class="fas fa-clock"></i></div>
+                                                                <div class="l-destribution">
+                                                                        <div class="l-menu__col-title"><?=_('CRON');?></div>
+                                                                        <div class="l-menu__description">
+                                                                        	<?=_('jobs');?>: <span><?=$panel[$user]['U_CRON_JOBS']?> / <?=$panel[$user]['CRON_JOBS']=='unlimited' ? "<b>∞</b>" : $panel[$user]['CRON_JOBS']?> (<?=$panel[$user]['SUSPENDED_CRON']?>)</span>                                                                        
+									</div>
+                                                                </div>
+							</a>
+							<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+                                                </div>
+                                                <ul class="submenu">
+                                                        <li>
+                                                                <a href="/add/cron/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add Job');?></a>
+                                                        </li>
+                                                </ul>
+					</div>
+				</li>
+				<?php } ?>
+			<?php } ?>
+			<!-- Backups tab -->
+			<?php if ((isset($_SESSION['BACKUP_SYSTEM'])) && (!empty($_SESSION['BACKUP_SYSTEM']))) {?>
+				<?php if($panel[$user]['BACKUPS'] != "0") { ?>
+				<li>
+                                        <div class="l-menu__item <?php if($TAB == 'BACKUP') echo 'l-menu__item--active' ?>">
+                                                <div class="l_menu_wide_item">
+                                                        <a href="/list/backup/">
+                                                                <div class="l-menu__icon"><i class="fas fa-file-archive"></i></div>
+                                                                <div class="l-destribution">
+                                                                        <div class="l-menu__col-title"><?=_('BACKUP');?></div>
+                                                                        <div class="l-menu__description">
+										<?=_('backups');?>: <span><?=$panel[$user]['U_BACKUPS']?> / <?=$panel[$user]['BACKUPS']=='unlimited' ? "<b>∞</b>" : $panel[$user]['BACKUPS']?></span>
+                                                                        </div>
+                                                                </div>
+                                                        </a>
+                                                        <div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+                                                </div>
+                                                <ul class="submenu">
+                                                <?php if ($read_only !== 'true') {?>
+							<li>
+								<a href="/add/cron/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add Cron Job');?></a>
+							</li>
+							<?php if($panel[$user]['CRON_REPORTS'] == 'yes') { ?>
+							<li>
+								<a class="l-menu__item" dir="ltr" href="/delete/cron/reports/?token=<?=$_SESSION['token'];?>"><i class="fas fa-toggle-off"></i> <?=_('turn off notifications');?></a>
+							</li>
+							<?php } else { ?>
+							<li>
+								<a class="l-menu__item" dir="ltr" href="/add/cron/reports/?token=<?=$_SESSION['token'];?>"><i class="fas fa-toggle-off"></i> <?=_('turn on notifications');?></a>
+							</li>
+							<?php } ?>
+						<?php } ?>
+                                                </ul>
+                                        </div>
+                                </li>
+				<?php } ?>
+			<?php } ?>
+			<!-- server things -->
+			<!-- Server Settings -->
+			<?php if (($_SESSION['userContext'] === 'admin') && ($_SESSION['POLICY_SYSTEM_HIDE_SERVICES'] !== 'yes') || ($_SESSION['user'] === 'admin')) {?>
+				<?php if (($_SESSION['userContext'] === 'admin') && (!empty($_SESSION['look']))) {?>
+					<!-- Hide 'Server Settings' button when impersonating 'admin' or other users -->
+				<?php } else { 
+					$in_server_array=array(
+						'SERVER', 'IP', 'RRD', 'FIREWALL'
+					);
+				?>
+				<li>
+                                	<div class="l-separator"></div>
+	                        </li>
+				<li>
+					<div class="l-menu__item <?php if(in_array($TAB,$in_server_array)) echo 'l-menu__item--active' ?>">
+						<div class="l_menu_wide_item">
+							<a href="/list/server/">
+								<div class="l-menu__icon"><i class="fas fa-cog"></i></div>
+								<div class="l-destribution">
+									<div class="l-menu__col-title l-menu__single-row"><?=_('SERVER')?></div>
+								</div>
+							</a>
+							<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+						</div>
+						<ul class="submenu">
+							<li>
+								<div class="l-menu__item">
+									<div class="l_menu_wide_item">
+										<a href="/edit/server">
+											<div class="l-menu__icon"><i class="fas fa-cog"></i></div>
+                                                                			<div class="l-destribution">
+                                                                        			<div class="l-menu__col-title l-menu__single-row"><?=_('Configure');?></div>
+			                                                                </div>
+										</a>
+										<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+									</div>
+									<ul class="submenu">
+										<li>
+											<div class="l-menu__item">
+												<div class="l_menu_wide_item">
+													<a href="/list/ip/">
+														<div class="l-menu__icon"><i class="fas fa-ethernet"></i></div>
+														<div class="l-destribution">
+															<div class="l-menu__col-title l-menu__single-row"><?=_('Network');?></div>
+														</div>
+													</a>
+													<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+												</div>
+												<ul class="submenu">
+													<li>
+														<a href="/add/ip/" id="btn-create" class="l-menu__item"><i class="fas fa-plus-circle"></i><?=_('Add IP Address');?></a>
+													</li>
+												</ul>
+											</div>
+										</li>
+										<li>
+											<div class="l-menu__item">
+												<div class="l_menu_wide_item">
+													<a href="/list/firewall/" class="l-menu__item" dir="ltr">
+														<div class="l-menu__icon"><i class="fas fa-shield-alt"></i></div>
+														<div class="l-destribution">
+															<div class="l-menu__col-title l-menu__single-row"><?=_('Firewall');?></div>
+														</div>
+													</a>
+													<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+												</div>
+												<ul class="submenu">
+													<li>
+														<a href="/add/firewall/" id="btn-create" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add Rule');?></a>
+													</li>
+													<li>
+														<div class="l-menu__item">
+															<div class="l_menu_wide_item">
+																<a href="/list/firewall/banlist/">
+																	<div class="l-menu__icon">
+																		<i class="fas fa-eye"></i>
+																	</div>
+																	<div class="l-destribution">
+																		<div class="l-menu__col-title l-menu__single-row"><?=_('Manage Banned IPs');?></div>
+																	</div>
+																</a>
+																<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>																</div>
+															<ul class="submenu">
+																<li>
+																	<a href="/add/firewall/banlist/" class="l-menu__item"><i class="fas fa-plus-circle"></i> <?=_('Add IP to ban list');?></a>
+																</li>
+															</ul>
+														</div>
+													</li>
+													<li>
+														<div class="l-menu__item">
+															<div class="l_menu_wide_item">
+																<a href="/list/firewall/ipset/">
+																	<div class="l-menu__icon"><i class="fas fa-list"></i></div>
+																	<div class="l-destribution">
+																		<div class="l-menu__col-title l-menu__single-row"><?=_('Manage IP lists');?></div>
+																	</div>
+																</a>
+																<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+															</div>
+															<ul class="submenu">
+																<li>
+																	<a href="/add/firewall/ipset/" class="l-menu__item" dir="ltr"><i class="fas fa-plus-circle"></i> <?=_('Add IP list');?></a>
+																</li>
+															</ul>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="l-menu__item">
+									<div class="l_menu_wide_item">
+										<a href="/list/rrd/">
+											<div class="l-menu__icon"><i class="fas fa-chart-area"></i></div>
+											<div class="l-destribution">
+												<div class="l-menu__col-title l-menu__single-row"><?=_('Graphs');?></div>
+											</div>
+										</a>
+										<div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+									</div>
+									<ul class="submenu">
+										<li>
+											<a href="/list/server/?cpu" class="l-menu__item"><i class="fas fa-microchip"></i> <?=_('CPU');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?mem" class="l-menu__item"><i class="fas fa-memory"></i> <?=_('RAM');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?disk" class="l-menu__item"><i class="fas fa-hdd"></i> <?=_('Disk');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?net" class="l-menu__item"><i class="fas fa-ethernet"></i> <?=_('Network');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?web" class="l-menu__item"><i class="fas fa-globe-europe"></i> <?=_('Web');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?dns" class="l-menu__item"><i class="fas fa-atlas"></i> <?=_('DNS');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?mail" class="l-menu__item"><i class="fas fa-mail-bulk"></i> <?=_('Mail');?></a>
+										</li>
+										<li>
+											<a href="/list/server/?db" class="l-menu__item"><i class="fas fa-database"></i> <?=_('DB');?></a>
+										</li>
+									</ul>
+								</div>
+								<!-- graphs -->
+							</li>
+							<li>
+								<div class="l-menu__item">
+									<div class="l_menu_wide_item">
+										<a href="/list/updates/">
+                                                                                        <div class="l-menu__icon"><i class="fas fa-sync"></i></div>
+                                                                                        <div class="l-destribution">
+                                                                                                <div class="l-menu__col-title l-menu__single-row"><?=_('Updates');?></div>
+                                                                                        </div>
+                                                                                </a>
+                                                                                <div class="toggle_submenu"><i class="fas fa-chevron-right"></i></div>
+									</div>
+									<ul class="submenu">
+										<li>
+											<?php
+											if($autoupdate == 'Enabled') {
+												$btn_url = '/delete/cron/autoupdate/?token='.$_SESSION['token'].'';
+												$btn_icon = 'fa-toggle-on status-icon green';
+												$btn_label = _('Disable automatic updates');
+											} else {
+												$btn_url = '/add/cron/autoupdate/?token='.$_SESSION['token'].'';
+												$btn_icon = 'fa-toggle-off status-icon red';
+												$btn_label = _('Enable automatic updates');
+											}
+											?>
+											<a class="l-menu__item" href="<?=$btn_url;?>"><i class="fas <?=$btn_icon;?>"></i> <?=$btn_label;?></a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<a href="/list/log/?user=system&token=<?=$_SESSION['token']?>" class="l-menu__item" dir="ltr"><i class="fas fa-binoculars"></i> <?=_('Logs');?></a>
+							</li>
+							<!-- server list -->
+						</ul>
+					</div>
+				</li>
+				<?php } ?>
+			<?php } ?>
+
+			<li>
+                                <div class="l-separator"></div>
+                        </li>
+			<!-- help -->
+			<li>
+				<a href="https://docs.hestiacp.com/" rel="noopener" class="l-menu__item" target="_blank"><i class="fas fa-question-circle"></i> <?=_('Help')?></a>
+			</li>
+			<li>
+                                <div class="l-separator"></div>
+                        </li>
+			<!-- current vertion -->
+			<li>
+				<div class="l-unit__stat-col l-unit__stat-col--left wide"><b><?=_('Hestia Control Panel');?>:</b></div>
+								<div class="l-unit__stat-col l-unit__stat-col--right">
+									<?php if ($sys['sysinfo']['RELEASE'] != 'release') { ?>
+										<i class="fas fa-flask icon-large status-icon red" title="<?=$sys['sysinfo']['RELEASE'];?>"></i>
+									<?php } ?>
+									<?php if ($sys['sysinfo']['RELEASE'] == 'release') { ?>
+										<i class="fas fa-cube icon-large status-icon" title="<?=_('Production release');?>"></i>
+									<?php } ?>
+									&nbsp;v<?=$sys['sysinfo']['HESTIA']?>
+								</div>
+				</div>
+			</li>
+			<li>
+                                <div class="l-separator"></div>
+                        </li>
 		</ul>
 	</nav>
 </aside>

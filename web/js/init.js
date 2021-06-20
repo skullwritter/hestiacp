@@ -598,6 +598,23 @@ $(document).ready(function(){
 				c.removeClass('active');
 			}
 		})
+		/** submenus **/
+		.on('click','.sidepanel.menu .toggle_submenu',function(e){
+			var t=$(this);
+			var p=t.parent().parent();
+			var ul=p.children('.submenu');
+			if(p.hasClass('active')){
+				ul.slideUp(300,function(){
+					p.removeClass('active');
+				});
+				t.css('transform','rotate(0deg)');
+			}else{
+				ul.slideDown(300,function(){
+					p.addClass('active');
+				});
+				t.css('transform','rotate(90deg)');
+			}
+		})
 		;
 
             VE.navigation.init();

@@ -100,6 +100,7 @@
 		text-align: center;
 		line-height: 40px;
 		flex: 0 0 40px;
+		transition: transform 0.2s linear;
 	}
 	.l_menu_wide_item>a {
 		width: calc(100% - 40px);
@@ -136,6 +137,13 @@
 		line-height: 18px;
 		display: inline-block;
 		font-size: 12px;
+	}
+	.sidepanel.menu nav ul li .l-menu__item > .submenu {
+		display: none;
+	}
+	.l_menu_wide_item > a .l-destribution .l-menu__col-title.l-menu__single-row {
+    		height: 40px;
+		line-height: 40px;
 	}
 }
 @media (min-width:1025px){
