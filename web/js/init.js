@@ -577,6 +577,7 @@ $(document).ready(function(){
                   $('.l-profile__notifications').removeClass('active');
                 }
               });
+		/** account menu **/
               $(document)
 		.on('click','.l-header .account .toggle_user_card',function(e){
 			var c=$('.l-header .account .user-center');
@@ -587,7 +588,17 @@ $(document).ready(function(){
 				c.removeClass('active');
 				c.hide();
   			}
-		});
+		})
+		/** sidepanel **/
+		.on('click','.l-header .side_menu_toggler',function(e){
+			var c=$('aside.sidepanel.menu');
+			if(!c.hasClass('active')){
+				c.addClass('active');
+			}else{
+				c.removeClass('active');
+			}
+		})
+		;
 
             VE.navigation.init();
 
