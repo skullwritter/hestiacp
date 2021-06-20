@@ -552,6 +552,11 @@ $(document).ready(function(){
                   $('.notification-container').hide();
                   $('.l-profile__notifications').removeClass('active');
                 }
+                //close account popup
+                if(!$(evt.target).hasClass('user-center') && $(evt.target).hasClass('.toggle_user_card') && $(evt.target).parents('user-center').length == 0){
+                  $('.user-center').hide();
+                  $('.user-center').removeClass('active');
+                }
               });
 
 
@@ -572,6 +577,17 @@ $(document).ready(function(){
                   $('.l-profile__notifications').removeClass('active');
                 }
               });
+              $(document)
+		.on('click','.l-header .account .toggle_user_card',function(e){
+			var c=$('.l-header .account .user-center');
+			if(!c.hasClass('active')){
+				c.addClass('active');
+				c.show();
+			}else{
+				c.removeClass('active');
+				c.hide();
+  			}
+		});
 
             VE.navigation.init();
 

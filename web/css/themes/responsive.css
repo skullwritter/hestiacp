@@ -1,0 +1,42 @@
+@media (max-width:1024px){
+	.not-responsive{
+		display:none;
+	}
+	.l-center{
+		max-width:100%;
+		min-width:100%;
+	}
+	.l-header{
+		overflow:initial !important;
+	}
+	.account .user-center.card {
+		z-index: 10;
+		position: absolute;
+		right: 0px;
+		min-height: auto !important;
+	}
+	.account .user-center.card .l-menu__item {
+		font-size: 16px;
+		display: block;
+		width: 100%;
+		text-align: left;
+		box-sizing: border-box;
+	}
+	.account .user-center.card {
+		z-index: 99;
+		position: absolute;
+		right: 0px;
+	}
+	.account .user-center.card .l-menu__item a {
+    		width: 100%;
+    		display: block;
+    		box-sizing: border-box;
+    		font-size: inherit !important;
+    		padding: 0px;
+	}
+}
+@media (min-width:1025px){
+	.responsive{
+		display:none;
+	}
+}

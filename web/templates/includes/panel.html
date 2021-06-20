@@ -31,7 +31,7 @@
 
 		<!-- Right Menu -->
 		<div class="l-profile noselect">
-			<div class="l-menu__item">
+			<div class="l-menu__item not-responsive">
 				<!-- Logged in as / Usage Statistics Overview -->
 				<span class="pill usage">
 					<?php
@@ -65,29 +65,32 @@
 				<?php if (($_SESSION['userContext'] === 'admin') && (!empty($_SESSION['look']))) {?>
 					<!-- Hide 'Server Settings' button when impersonating 'admin' or other users -->
 				<?php } else { ?>				
-					<div class="l-menu__item <?php if($TAB == 'SERVER') echo 'l-menu__item--active' ?> <?php if($TAB == 'IP') echo 'l-menu__item--active' ?> <?php if($TAB == 'RRD') echo 'l-menu__item--active' ?> <?php if($TAB == 'FIREWALL') echo 'l-menu__item--active' ?>"><a href="/list/server/" class="l-profile__serversettings" title="<?=_('Server');?>"><i class="fas fa-cog"></i></a></div>
+					<div class="l-menu__item not-responsive <?php if($TAB == 'SERVER') echo 'l-menu__item--active' ?> <?php if($TAB == 'IP') echo 'l-menu__item--active' ?> <?php if($TAB == 'RRD') echo 'l-menu__item--active' ?> <?php if($TAB == 'FIREWALL') echo 'l-menu__item--active' ?>"><a href="/list/server/" class="l-profile__serversettings" title="<?=_('Server');?>"><i class="fas fa-cog"></i></a></div>
 				<?php } ?>
 			<?php } ?>
 
 			<!-- Edit User -->
 			<?php if (($_SESSION['userContext'] === 'admin') && (isset($_SESSION['look']) && ($user == 'admin'))) {?>
 				<!-- Hide 'edit user' entry point from other administrators for default 'admin' account-->
-				<div class="l-menu__item"><a href="/list/log/" title="<?_('Logs');?>" class="l-profile__username"><i class="fas fa-history"></i></a></div>
+				<div class="l-menu__item not-responsive"><a href="/list/log/" title="<?_('Logs');?>" class="l-profile__username"><i class="fas fa-history"></i></a></div>
 			<?php } else { ?>
 				<?php if ($panel[$user]['SUSPENDED'] === 'no') {?>
-					<div class="l-menu__item"><a href="/edit/user/?user=<?=$user; ?>&token=<?=$_SESSION['token']?>" title="<?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)" class="l-profile__username"><i class="fas fa-user-circle"></i></a></div>
+					<div class="l-menu__item not-responsive"><a href="/edit/user/?user=<?=$user; ?>&token=<?=$_SESSION['token']?>" title="<?=htmlspecialchars($user)?> (<?=htmlspecialchars($panel[$user]['NAME'])?>)" class="l-profile__username"><i class="fas fa-user-circle"></i></a></div>
 				<?php } ?>
 			<?php } ?>
 
 			<!-- Help / Documentation-->
-			<div class="l-menu__item"><a href="https://docs.hestiacp.com/" rel="noopener" title="<?=_('Help');?>" class="l-profile__help" target="_blank"><i class="fas fa-question-circle"></i></a></div>
+			<div class="l-menu__item not-responsive"><a href="https://docs.hestiacp.com/" rel="noopener" title="<?=_('Help');?>" class="l-profile__help" target="_blank"><i class="fas fa-question-circle"></i></a></div>
 			
 			<!-- Logout -->
 			<?php if (isset($_SESSION['look']) && (!empty($_SESSION['look']))) { ?>
-				<div class="l-menu__item"><a href="/logout/" title="<?=_('Log out');?> (<?=$user?>)" class="l-profile__logout"><i class="fas fa-arrow-alt-circle-up"></i></a></div>
+				<div class="l-menu__item not-responsive"><a href="/logout/" title="<?=_('Log out');?> (<?=$user?>)" class="l-profile__logout"><i class="fas fa-arrow-alt-circle-up"></i></a></div>
 			<?php } else { ?>
-				<div class="l-menu__item"><a href="/logout/" title="<?=_('Log out');?>" class="l-profile__logout"><i class="fas fa-sign-out-alt"></i></a></div>
+				<div class="l-menu__item not-responsive"><a href="/logout/" title="<?=_('Log out');?>" class="l-profile__logout"><i class="fas fa-sign-out-alt"></i></a></div>
 			<?php } ?>
+			<!-- include account part -->
+			<?php include ($_SERVER['HESTIA'] . '/web/templates/includes/account.html')?>
+			<!-- end include account part -->
 		</div>
 	</div>
 </div>
