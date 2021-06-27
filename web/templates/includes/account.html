@@ -8,7 +8,7 @@
 		<!-- bandwith, space -->
 		<div class="l-menu__item">
                          <!-- Logged in as / Usage Statistics Overview -->
-                         <span class="pill usage">
+                         <span class="pill usage w100">
                                 <?php
                                 if (isset($_SESSION['look'])) {
                                 	$user_icon = 'fa-binoculars';
@@ -18,8 +18,12 @@
                                         $user_icon = 'fa-user';
                                 }
                                 ?>
-                                <span class="label-space-right"><i class="fas fa-hdd icon-pad-right" title="<?=_('Disk');?>: <?=humanize_usage_size($panel[$user]['U_DISK'])?> <?=humanize_usage_measure($panel[$user]['U_DISK'])?>"></i><b><?=humanize_usage_size($panel[$user]['U_DISK'])?></b> <?=humanize_usage_measure($panel[$user]['U_DISK'])?></span>
-                        	<span><i class="fas fa-exchange-alt icon-pad-right" title="<?=_('Bandwidth');?>: <?=humanize_usage_size($panel[$user]['U_DISK'])?> <?=humanize_usage_measure($panel[$user]['U_DISK'])?>"></i><b><?=humanize_usage_size($panel[$user]['U_BANDWIDTH'])?></b> <?=humanize_usage_measure($panel[$user]['U_BANDWIDTH'])?></span>
+                                <span class="label-space-right"><i class="fas fa-hdd icon-pad-right"></i> <?=_('Disk');?>: <b><?=humanize_usage_size($panel[$user]['U_DISK'])?></b> <?=humanize_usage_measure($panel[$user]['U_DISK'])?></span>
+			</span>
+		</div>
+		<div class="l-menu__item">
+			<span class="pill usage w100">
+                        	<span><i class="fas fa-exchange-alt icon-pad-right"></i> <?=_('Bandwidth');?>: <b><?=humanize_usage_size($panel[$user]['U_BANDWIDTH'])?></b> <?=humanize_usage_measure($panel[$user]['U_BANDWIDTH'])?></span>
                 	</span>
                 </div>
 		<!-- end bandwidth,space -->

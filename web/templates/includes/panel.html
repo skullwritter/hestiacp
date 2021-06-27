@@ -1,8 +1,13 @@
+<?php
+	$on_the_records=array(
+		'WEB', 'DNS', 'MAIL', 'DB', 'BACKUP', 'CRON', 'PACKAGE', 'USER', 'LOG'
+	);
+?>
 <div class="hidden" id="token" token="<?=$_SESSION['token']?>"></div>
 <a href="#" class="to-top" title="<?=_('Top');?>">
 	<i class="fas fa-arrow-up"></i>
 </a>
-<a href="#" class="to-shortcuts" title="<?=_('Shortcuts');?>">
+<a href="#" class="to-shortcuts not-responsive" title="<?=_('Shortcuts');?>">
 	<i class="fas fa-keyboard"></i>
 </a>
 
@@ -10,11 +15,6 @@
 	<div class="l-center">
 		<!-- Logo / Home Button -->
 		<a href="<?=htmlspecialchars($home_url)?>" class="l-logo" title="<?=_('Hestia Control Panel');?>"></a>
-		<?php 
-			$on_the_records=array(
-				'WEB', 'DNS', 'MAIL', 'DB', 'BACKUP', 'CRON', 'PACKAGE', 'USER', 'LOG'
-			);
-		?>
 		<!-- Left Menu -->
 		<div class="l-menu clearfix noselect">
 			<!-- Menu toggle -->
@@ -104,7 +104,7 @@
 <ul class="notification-container hidden animated fadeIn"></ul>
 
 <div class="l-content">
-	<div class="l-center not-responsive">
+	<div class="l-center">
 		<div class="l-stat">
 			<!-- Users tab -->
 			<?php if (($_SESSION['userContext'] === 'admin') && (!isset($_SESSION['look']))) {?>
@@ -115,7 +115,7 @@
 						$user_count = $panel[$user]['U_USERS'];
 					} 
 				?>
-				<div class="l-stat__col <?php if($TAB == 'USER') echo 'l-stat__col--active' ?><?php if($TAB == 'LOG') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'USER')? 'l-stat__col--active': 'is-responsive-hidden' ?><?php if($TAB == 'LOG') echo 'l-stat__col--active' ?>">
 					<a href="/list/user/"  title="<?=_('Users');?>: <?=$user_count;?>&#13;<?=_('Suspended');?>: <?=$panel[$user]['SUSPENDED_USERS']?>">
 						<div class="l-stat__col-title"><?=_('USER');?>&nbsp;&nbsp;<i class="fas fa-users"></i></div>
 						<ul>
@@ -129,7 +129,7 @@
 			<!-- Web tab -->
 			<?php if ((isset($_SESSION['WEB_SYSTEM'])) && (!empty($_SESSION['WEB_SYSTEM']))) {?>
 				<?php if($panel[$user]['WEB_DOMAINS'] != "0") { ?>
-					<div class="l-stat__col <?php if($TAB == 'WEB') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'WEB')? 'l-stat__col--active' : 'is-responsive-hidden'; ?>">
 						<a href="/list/web/" title="<?=_('Domains');?>: <?=$panel[$user]['U_WEB_DOMAINS']?>&#13;<?=_('Aliases');?>: <?=$panel[$user]['U_WEB_ALIASES']?>&#13;<?=_('Limit')?>: <?=$panel[$user]['WEB_DOMAINS']=='unlimited' ? "∞" : $panel[$user]['WEB_DOMAINS']?>&#13;<?=_('Suspended');?>: <?=$panel[$user]['SUSPENDED_WEB']?>">
 							<div class="l-stat__col-title"><?=_('WEB');?>&nbsp;&nbsp;<i class="fas fa-globe-americas"></i></div>
 							<ul>
@@ -144,7 +144,7 @@
 			<!-- DNS tab -->
 			<?php if ((isset($_SESSION['DNS_SYSTEM'])) && (!empty($_SESSION['DNS_SYSTEM']))) {?>
 				<?php if($panel[$user]['DNS_DOMAINS'] != "0") { ?>
-					<div class="l-stat__col <?php if($TAB == 'DNS') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'DNS')? 'l-stat__col--active': 'is-responsive-hidden'; ?>">
 						<a href="/list/dns/" title="<?=_('Domains');?>: <?=$panel[$user]['U_DNS_DOMAINS']?>&#13;<?=_('Limit')?>: <?=$panel[$user]['DNS_DOMAINS']=='unlimited' ? "∞" : $panel[$user]['DNS_DOMAINS']?>&#13;<?=_('Suspended');?>: <?=$panel[$user]['SUSPENDED_DNS']?>">
 							<div class="l-stat__col-title"><?=_('DNS');?>&nbsp;&nbsp;<i class="fas fa-atlas"></i></div>
 							<ul>
@@ -159,7 +159,7 @@
 			<!-- Mail tab -->
 			<?php if ((isset($_SESSION['MAIL_SYSTEM'])) && (!empty($_SESSION['MAIL_SYSTEM']))) {?>
 				<?php if($panel[$user]['MAIL_DOMAINS'] != "0") { ?>
-					<div class="l-stat__col <?php if($TAB == 'MAIL') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'MAIL')? 'l-stat__col--active':'is-responsive-hidden' ?>">
 						<a href="/list/mail/"  title="<?=_('Domains');?>: <?=$panel[$user]['U_MAIL_DOMAINS']?>&#13;<?=_('Limit')?>: <?=$panel[$user]['MAIL_DOMAINS']=='unlimited' ? "∞" : $panel[$user]['MAIL_DOMAINS']?>&#13;<?=_('Suspended');?>: <?=$panel[$user]['SUSPENDED_MAIL']?>">
 							<div class="l-stat__col-title"><?=_('MAIL');?>&nbsp;&nbsp;<i class="fas fa-mail-bulk"></i></div>
 							<ul>
@@ -174,7 +174,7 @@
 			<!-- Databases tab -->
 			<?php if ((isset($_SESSION['DB_SYSTEM'])) && (!empty($_SESSION['DB_SYSTEM']))) {?>
 				<?php if($panel[$user]['DATABASES'] != "0") { ?>
-					<div class="l-stat__col <?php if($TAB == 'DB') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'DB')? 'l-stat__col--active': 'is-responsive-hidden'; ?>">
 						<a href="/list/db/" title="<?=_('Databases');?>: <?=$panel[$user]['U_DATABASES']?>&#13;<?=_('Limit')?>: <?=$panel[$user]['DATABASES']=='unlimited' ? "∞" : $panel[$user]['DATABASES']?>&#13;<?=_('Suspended');?>: <?=$panel[$user]['SUSPENDED_DB']?>">
 							<div class="l-stat__col-title"><?=_('DB');?>&nbsp;&nbsp;<i class="fas fa-database"></i></div>
 							<ul>
@@ -188,7 +188,7 @@
 			<!-- Cron tab -->
 			<?php if ((isset($_SESSION['CRON_SYSTEM'])) && (!empty($_SESSION['CRON_SYSTEM']))) {?>
 				<?php if($panel[$user]['CRON_JOBS'] != "0") { ?>
-					<div class="l-stat__col <?php if($TAB == 'CRON') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'CRON')? 'l-stat__col--active':'is-responsive-hidden'; ?>">
 						<a href="/list/cron/" title="<?=_('Jobs');?>: <?=$panel[$user]['U_WEB_DOMAINS']?>&#13;<?=_('Limit')?>: <?=$panel[$user]['CRON_JOBS']=='unlimited' ? "∞" : $panel[$user]['CRON_JOBS']?>&#13;<?=_('Suspended');?>: <?=$panel[$user]['SUSPENDED_CRON']?>">
 							<div class="l-stat__col-title"><?=_('CRON');?>&nbsp;&nbsp;<i class="fas fa-clock"></i></div>
 							<ul>
@@ -202,7 +202,7 @@
 			<!-- Backups tab -->
 			<?php if ((isset($_SESSION['BACKUP_SYSTEM'])) && (!empty($_SESSION['BACKUP_SYSTEM']))) {?>
 				<?php if($panel[$user]['BACKUPS'] != "0") { ?>
-					<div class="l-stat__col <?php if($TAB == 'BACKUP') echo 'l-stat__col--active' ?>">
+					<div class="l-stat__col <?php echo ($TAB == 'BACKUP')? 'l-stat__col--active':'is-responsive-hidden' ?>">
 						<a href="/list/backup/" title="<?=_('Backups');?>: <?=$panel[$user]['U_BACKUPS']?>&#13;<?=_('Limit')?>: <?=$panel[$user]['BACKUPS']=='unlimited' ? "∞" : $panel[$user]['BACKUPS']?>">
 							<div class="l-stat__col-title"><?=_('BACKUP');?>&nbsp;&nbsp;<i class="fas fa-file-archive"></i></div>
 							<ul>
@@ -215,4 +215,4 @@
 		</div>
 	</div>
 
-	<div class="l-separator"></div>
+	<div class="l-separator no-margins"></div>

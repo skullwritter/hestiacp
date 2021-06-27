@@ -10,7 +10,7 @@ unset($output_updates);
 	<nav>
 		<ul>
 			<li>
-				<div class="l-menu__item <?php if(in_array($TAB,$on_the_records)) echo 'l-menu__item--active' ?>">
+				<div class="l-menu__item <?php if(in_array($TAB,$on_the_records)) echo 'l-responsive-active' ?>">
 					<a href="<?=htmlspecialchars($home_url)?>">
 						<i class="fas fa-tasks panel-icon"></i> <?=_('Records');?>
 					</a>
@@ -24,13 +24,13 @@ unset($output_updates);
                                 <?php if (($_SESSION['userContext'] === 'admin') && (isset($_SESSION['look']) && ($_SESSION['look'] === 'admin') && ($_SESSION['POLICY_SYSTEM_PROTECTED_ADMIN'] == 'yes'))) {?>
                                                 <!-- Hide file manager when impersonating admin-->
                                         <?php } else { ?>
-                                                <div class="l-menu__item <?php if($TAB == 'FM') echo 'l-menu__item--active' ?>"><a href="/fm/"><i class="fas fa-folder-open panel-icon"></i><?=_('Files');?></a></div>
+                                                <div class="l-menu__item <?php if($TAB == 'FM') echo 'l-responsive-active' ?>"><a href="/fm/"><i class="fas fa-folder-open panel-icon"></i><?=_('Files');?></a></div>
                                 <?php } ?>
                         </li>
 			<?php } ?>
 			<li>
         	                <!-- Statistics tab-->
-	                        <div class="l-menu__item <?php if($TAB == 'STATS') echo 'l-menu__item--active' ?>">
+	                        <div class="l-menu__item <?php if($TAB == 'STATS') echo 'l-responsive-active' ?>">
 					<a href="/list/stats/">
 						<i class="fas fa-chart-line panel-icon"></i> <?=_('Statistics');?>
 					</a>
@@ -49,7 +49,7 @@ unset($output_updates);
                                                 $user_count = $panel[$user]['U_USERS'];
                                         }
                                 ?>
-                                <div class="l-menu__item <?php if(($TAB == 'USER') || ($TAB == 'LOG')) echo 'l-menu__item--active' ?>">
+                                <div class="l-menu__item <?php if(($TAB == 'USER') || ($TAB == 'LOG')) echo 'l-responsive-active' ?>">
 					<div class="l_menu_wide_item">
                                         	<a href="/list/user/">
 							<div class="l-menu__icon"><i class="fas fa-users"></i></div>
@@ -77,7 +77,7 @@ unset($output_updates);
 			<?php if ((isset($_SESSION['WEB_SYSTEM'])) && (!empty($_SESSION['WEB_SYSTEM']))) {?>
 				<?php if($panel[$user]['WEB_DOMAINS'] != "0") { ?>
 				<li>
-					<div class="l-menu__item <?php if($TAB == 'WEB') echo 'l-menu__item--active' ?>">
+					<div class="l-menu__item <?php if($TAB == 'WEB') echo 'l-responsive-active' ?>">
 						<div class="l_menu_wide_item">
 							<a href="/list/web/">
 								<div class="l-menu__icon"><i class="fas fa-globe-americas"></i></div>
@@ -104,7 +104,7 @@ unset($output_updates);
 			<?php if ((isset($_SESSION['DNS_SYSTEM'])) && (!empty($_SESSION['DNS_SYSTEM']))) {?>
 				<?php if($panel[$user]['DNS_DOMAINS'] != "0") { ?>
 				<li>
-					<div class="l-menu__item <?php if($TAB == 'DNS') echo 'l-menu__item--active' ?>">
+					<div class="l-menu__item <?php if($TAB == 'DNS') echo 'l-responsive-active' ?>">
 						<div class="l_menu_wide_item">
 							<a href="/list/dns/">
 								<div class="l-menu__icon"><i class="fas fa-atlas"></i></div>
@@ -130,7 +130,7 @@ unset($output_updates);
 			<?php if ((isset($_SESSION['MAIL_SYSTEM'])) && (!empty($_SESSION['MAIL_SYSTEM']))) {?>
 				<?php if($panel[$user]['MAIL_DOMAINS'] != "0") { ?>
 				<li>
-					<div class="l-menu__item <?php if($TAB == 'MAIL') echo 'l-menu__item--active' ?>">
+					<div class="l-menu__item <?php if($TAB == 'MAIL') echo 'l-responsive-active' ?>">
 						<div class="l_menu_wide_item">
 							<a href="/list/mail/">
 								<div class="l-menu__icon"><i class="fas fa-mail-bulk"></i></div>
@@ -157,7 +157,7 @@ unset($output_updates);
 			<?php if ((isset($_SESSION['DB_SYSTEM'])) && (!empty($_SESSION['DB_SYSTEM']))) {?>
 				<?php if($panel[$user]['DATABASES'] != "0") { ?>
 				<li>
-					<div class="l-menu__item <?php if($TAB == 'DB') echo 'l-menu__item--active' ?>">
+					<div class="l-menu__item <?php if($TAB == 'DB') echo 'l-responsive-active' ?>">
                                                 <div class="l_menu_wide_item">
                                                         <a href="/list/db/">
                                                                 <div class="l-menu__icon"><i class="fas fa-database"></i></div>
@@ -184,7 +184,7 @@ unset($output_updates);
 			<?php if ((isset($_SESSION['CRON_SYSTEM'])) && (!empty($_SESSION['CRON_SYSTEM']))) {?>
 				<?php if($panel[$user]['CRON_JOBS'] != "0") { ?>
 				<li>
-					<div class="l-menu__item <?php if($TAB == 'CRON') echo 'l-menu__item--active' ?>">
+					<div class="l-menu__item <?php if($TAB == 'CRON') echo 'l-responsive-active' ?>">
 						<div class="l_menu_wide_item">
 							<a href="/list/cron/">
 								<div class="l-menu__icon"><i class="fas fa-clock"></i></div>
@@ -210,7 +210,7 @@ unset($output_updates);
 			<?php if ((isset($_SESSION['BACKUP_SYSTEM'])) && (!empty($_SESSION['BACKUP_SYSTEM']))) {?>
 				<?php if($panel[$user]['BACKUPS'] != "0") { ?>
 				<li>
-                                        <div class="l-menu__item <?php if($TAB == 'BACKUP') echo 'l-menu__item--active' ?>">
+                                        <div class="l-menu__item <?php if($TAB == 'BACKUP') echo 'l-responsive-active' ?>">
                                                 <div class="l_menu_wide_item">
                                                         <a href="/list/backup/">
                                                                 <div class="l-menu__icon"><i class="fas fa-file-archive"></i></div>
@@ -257,7 +257,7 @@ unset($output_updates);
                                 	<div class="l-separator"></div>
 	                        </li>
 				<li>
-					<div class="l-menu__item <?php if(in_array($TAB,$in_server_array)) echo 'l-menu__item--active' ?>">
+					<div class="l-menu__item <?php if(in_array($TAB,$in_server_array)) echo 'l-responsive-active' ?>">
 						<div class="l_menu_wide_item">
 							<a href="/list/server/">
 								<div class="l-menu__icon"><i class="fas fa-cog"></i></div>
