@@ -552,11 +552,6 @@ $(document).ready(function(){
                   $('.notification-container').hide();
                   $('.l-profile__notifications').removeClass('active');
                 }
-                //close account popup
-                if(!$(evt.target).hasClass('user-center') && $(evt.target).hasClass('.toggle_user_card') && $(evt.target).parents('user-center').length == 0){
-                  $('.user-center').hide();
-                  $('.user-center').removeClass('active');
-                }
               });
 
 
@@ -577,57 +572,6 @@ $(document).ready(function(){
                   $('.l-profile__notifications').removeClass('active');
                 }
               });
-		/** account menu **/
-              $(document)
-		.on('click','.l-header .account .toggle_user_card',function(e){
-			var c=$('.l-header .account .user-center');
-			if(!c.hasClass('active')){
-				c.addClass('active');
-				c.show();
-			}else{
-				c.removeClass('active');
-				c.hide();
-  			}
-		})
-		/** sidepanel **/
-		.on('click','.l-header .side_menu_toggler',function(e){
-			var c=$('aside.sidepanel.menu');
-			if(!c.hasClass('active')){
-				c.addClass('active');
-			}else{
-				c.removeClass('active');
-			}
-		})
-		/** submenus **/
-		.on('click','.sidepanel.menu .toggle_submenu',function(e){
-			var t=$(this);
-			var p=t.parent().parent();
-			var ul=p.children('.submenu');
-			if(p.hasClass('active')){
-				ul.slideUp(300,function(){
-					p.removeClass('active');
-				});
-				t.css('transform','rotate(0deg)');
-			}else{
-				ul.slideDown(300,function(){
-					p.addClass('active');
-				});
-				t.css('transform','rotate(90deg)');
-			}
-		})
-		.on('click','.l-unit .toggle_submenu',function(e){
-			var t=$(this); var p=t.closest('.l-unit'); var l=p.find('.responsive.toggling');
-			if(p.hasClass('active')){
-				t.css('transform','rotate(0deg)');
-				p.removeClass('active');
-				l.slideUp();
-			}else{
-				t.css('transform','rotate(90deg)');
-				p.addClass('active');
-				l.slideDown();
-			}
-		})
-		;
 
             VE.navigation.init();
 
