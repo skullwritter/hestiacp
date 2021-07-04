@@ -315,6 +315,77 @@
 	.l-content .l-center .l-sort, .l-content .l-center .table-header, .l-content .l-center .l-unit > .l-unit__col {
 		width: 100%;
 	}
+	.l-content .l-center .l-unit .l-unit-toolbar__buttonstrip, 
+	.l-content .l-center .l-sort .l-unit-toolbar__buttonstrip{
+		margin-top:0px !important;
+		padding-top:8px;
+		padding-bottom:8px;
+	}
+	.l-content .l-center .l-unit:before, 
+	.l-content .l-center .l-unit:after,
+	.l-content .l-center .l-sort:before, 
+	.l-content .l-center .l-sort:after {
+		display: block !important;
+		width: 100% !important;
+		height: 1px !important;
+		float: none !important;
+		position: initial !important;
+		flex: 1 1 100%;
+	}
+	form#vstobjects {
+		padding: 0px;
+		box-sizing: border-box;
+		max-width: 100%;
+	}
+
+	.l-center table.data {
+		max-width: 100%;
+		width: auto;
+		box-sizing: border-box;
+		margin-right: 0px !important;
+		display: block;
+		padding: 8px 16px;
+	}
+
+	.l-center table.data table, .l-center table.data tbody {
+		max-width: 100%;
+		width: auto;
+		box-sizing: border-box;
+		display: block;
+	}
+
+	.l-center table.data tr {
+		display: block;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+	.l-center table.data tr td {
+		display: block;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+	table.data-col2 {}
+
+	.l-center table.data input:not([type*="radio"]):not([type*="checkbox"]), .l-center table.data select, .l-center table.data textarea {
+		max-width: 100%;
+		box-sizing: border-box;
+		height: 38px;
+		width: 100%;
+		min-width: 0%;
+		background-position: calc(100% - 16px);
+	}
+
+	.l-center table.data tr meter {
+		max-width: 100%;
+		box-sizing: border-box;
+		margin-left: 0px;
+		width: 100%;
+	}
+
+	.l-center table.data span.hide-password {
+	}
 }
 /***************************************/
 @media (max-width: 992px){
@@ -355,5 +426,94 @@
     display: block;
     box-sizing: border-box;
 }
+/**************************************/
+/*** login ****************************/
+/**************************************/
+@media (max-width:500px){
+    body.body-login {}
+
+    body.body-login table.login {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    body.body-login table.login tr {}
+
+    body.body-login table.login tr td {}
+
+    body.body-login table.login tr td table {
+        display: block;
+        padding: 16px 8px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    body.body-login table.login tr td table tr td {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+        flex: 1 1 auto;
+        position: relative;
+        display: inline-block;
+    }
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr:first-child>td:first-child {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr:first-child>td:first-child a {
+        max-width: 270px;
+        width: 80px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 280px;
+        height: auto !important;
+    }
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr:first-child>td:first-child a img {
+        display: block;
+        margin: 0px !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        height: auto !important;
+        clear: both;
+        margin-left: auto;
+        width: auto !important;
+    }
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr:first-child>td:last-child {
+        padding: 22px 8px !important;
+    }
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr:first-child>td:last-child form {}
+
+    body.body-login table.login>tbody:first-child tr:first-child>td:first-child>table:first-child>tbody:first-child>tr:first-child>td:last-child form input:not([type*="button"]):not([type*="submit"]):not([type*="reset"]) {
+        max-width: 100%;
+        width: 100% !important;
+        box-sizing: border-box;
+        line-height: 38px !important;
+        height: 38px !important;
+    }
+
+    body.body-login table.login tr td table tbody {
+        width: 100%;
+        max-width: 100%;
+        display: table;
+    }
+
+    body.body-login table.login tr td table tbody td {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        box-sizing: border-box;
+    }
+}
+
 
 
