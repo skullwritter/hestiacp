@@ -7,12 +7,15 @@ All notable changes to this project will be documented in this file.
 
 ### Bugfixes
 
+- Fix #1961 Renewal Apache2 only SSL certificate fails 
+
 ## [1.4.5] - Service release
 
 ### Bugfixes
 
 - Revert #1943 and rework it to fix possible errors occuring on v-rebuild-cron-jobs.
 - Fixed #1956 to prevent reset of defined webmail client.
+- Explicitly disable cron reports #1978
 
 ## [1.4.4] - Service release
 
@@ -20,7 +23,7 @@ All notable changes to this project will be documented in this file.
 
 - Add nginx user_agent separation to desktop/mobile (e.g. for fastcgi cache)
 - Run phpmyadmin folder under www-data user instead of "user" improving security. (@bet0x)
-- Added new template for mod php users to access phpmymyadmin
+- Added new template for mod php users to access phpmyadmin
 
 ### Bugfixes
 

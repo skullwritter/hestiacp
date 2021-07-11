@@ -127,11 +127,12 @@ if [ ! -z "$mail" ]; then
     fi
 fi
 
-log_file="/var/log/hestia/LE-${user}-${domain}-$(date +%Y%m%d-%H%M%S).log"
+log_file="/var/log/hestia/LE-${user}-${domain}.log"
 touch "$log_file"
 chmod 600 "$log_file"
 
 echo -e "\n\n=============================
+Date Time: $(date +%Y-%m-%d) $(date +%H:%M:%S)
 WEB_SYSTEM: ${WEB_SYSTEM}
 PROXY_SYSTEM: ${PROXY_SYSTEM}
 user: ${user}
@@ -331,7 +332,7 @@ for auth in $authz; do
                     check_result $? "Proxy restart failed" > /dev/null
                 fi
             else  
-                get_object_value 'mail' 'DOMAIN' "$domain" "WEBMAIL" 
+                get_object_value 'mail' 'DOMAIN' "$root_domain" "WEBMAIL" 
                 if [ ! -z "$WEBMAIL" ]; then 
                     well_known="/var/lib/$WEBMAIL/.well-known"
                     acme_challenge="$well_known/acme-challenge"
