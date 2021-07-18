@@ -1,13 +1,30 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## Development 
-
-### Features
+## [1.4.7] - Service release 
 
 ### Bugfixes
 
-- Fix #1961 Renewal Apache2 only SSL certificate fails 
+- Fix #1984 phppgadmin not working on apache2 systems
+- Fix #1985 Restart service not working
+
+
+## [1.4.6] - Service release 
+
+### Features
+
+- Add support for custom install hooks #1757
+- Add template for CraftCMS #1973 @anvme
+- Upgrade Filegator to 7.6.0
+
+### Bugfixes
+
+- Fix #1961 Renewal Apache2 only SSL certificate fails
+- Fixed #1956 to prevent reset of defined webmail client.
+- Explicitly disable cron reports #1978 
+- Fixed an issue where in rare cases certificate failed to install @dpeca and @myvesta
+- Fixed an issue where composer failed to install when .composer folder is missing
+- Fix #1980 Lets Encrypt Auto Renewal Reverts Webmail Client back to Roundcube
 
 ## [1.4.5] - Service release
 
